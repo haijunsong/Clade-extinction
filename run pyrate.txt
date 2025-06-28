@@ -1,0 +1,16 @@
+# launch RJMCMC with Non-homogeneous Poisson process of preservation (NHPP) model. -j from 1 to 10. And run all the clades.
+python PyRate.py ./Ammonoidea_PyRate.py -A 4 -j 1 -qShift ./epochs/epochs_q.txt -s 2000 -p 100000 # j from 1 to 10.
+
+# Combine log files across replicates
+python PyRate.py -combLog ./pyrate_mcmc_logs/Ammonoidea -tag mcmc -b 200
+python PyRate.py -combLog ./pyrate_mcmc_logs/Ammonoidea -tag ex_rates -b 200
+python PyRate.py -combLog ./pyrate_mcmc_logs/Ammonoidea -tag sp_rates -b 200
+
+# rate and diversity trajectory plots
+python PyRate.py -plotRJ ./pyrate_mcmc_logs/Ammonoidea -b 200 -grid_plot 0.1
+python PyRate.py -d ./pyrate_mcmc_logs/Ammonoidea/combined_10mcmc_se_est.txt -ltt 1
+python PyRate.py -ginput ./pyrate_mcmc_logs/Ammonoidea/10REP -b 200 -grid_plot 0.1
+
+
+
+
